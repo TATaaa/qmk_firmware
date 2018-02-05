@@ -11,3 +11,6 @@
 [submodule "lib/googletest"]
 	path = lib/googletest
 	url = https://github.com/google/googletest
+[submodule "keyboards/helix/helix"]
+	path = keyboards/helix/helix
+	url = https://github.com/MakotoKurauchi/helix.git
