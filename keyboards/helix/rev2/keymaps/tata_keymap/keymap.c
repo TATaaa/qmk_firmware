@@ -33,6 +33,7 @@ extern uint8_t is_master;
 #define _LOWER 3
 #define _RAISE 4
 #define _ADJUST 16
+#define _EUCALYN 5
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -44,7 +45,8 @@ enum custom_keycodes {
   BACKLIT,
   EISU,
   KANA,
-  RGBRST
+  RGBRST,
+  EUCALYN
 };
 
 enum macro_keycodes {
@@ -182,10 +184,33 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_ADJUST] =  KEYMAP( \
       KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12, \
       _______, RESET,   RGBRST,  _______, _______, _______,                   _______, _______, _______, _______, _______, KC_DEL, \
-      _______, _______, _______, AU_ON,   AU_OFF,  AG_NORM,                   AG_SWAP, QWERTY,  COLEMAK, DVORAK,  _______, _______, \
+      _______, _______, _______, AU_ON,   AU_OFF,  AG_NORM,                   AG_SWAP, QWERTY,  COLEMAK, DVORAK,  EUCALYN, _______, \
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_SMOD,RGB_HUD, RGB_SAD, RGB_VAD \
+      ),
+
+  
+  /* Eucalyn
+   * ,-----------------------------------------.             ,-----------------------------------------.
+   * |   `  |   1  |   2  |   3  |   4  |   5  |             |   6  |   7  |   8  |   9  |   0  | Del  |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | Tab  |   /  |   ,  |   .  |   F  |   Q  |             |   M  |   R  |   D  |   Y  |   P  | Bksp |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | Ctrl |   A  |   O  |   E  |   I  |   U  |             |   G  |   T  |   K  |   S  |   N  |  '   |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * | Shift|   Z  |   X  |   C  |   V  |   W  |   [  |   ]  |   B  |   H  |   J  |   L  |   ;  |Enter |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * |Adjust| Esc  | Alt  | GUI  | EISU |Lower |Space |Space |Raise | KANA | Left | Down |  Up  |Right |
+   * `-------------------------------------------------------------------------------------------------'
+   */
+  [_EUCALYN] = KEYMAP( \
+      KC_GRV,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_DEL, \
+      KC_TAB,  KC_SLSH, KC_COMM, KC_DOT,  KC_F,    KC_Q,                      KC_M,    KC_R,    KC_D,    KC_Y,    KC_P,    KC_BSPC, \
+      KC_LCTL, KC_A,    KC_O,    KC_E,    KC_I,    KC_U,                      KC_G,    KC_T,    KC_K,    KC_S,    KC_N,    KC_QUOT, \
+      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_W,    KC_LBRC, KC_RBRC, KC_B,    KC_H,    KC_J,    KC_L,    KC_SCLN, KC_ENT , \
+      ADJUST,  KC_ESC,  KC_LALT, KC_LGUI, EISU,    LOWER,   KC_SPC,  KC_SPC,  RAISE,   KANA,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
       )
+
 };
 
 #elif HELIX_ROWS == 4
@@ -295,10 +320,29 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_ADJUST] =  KEYMAP( \
       _______, RESET,   _______, _______, _______, _______,                   _______, _______, _______, _______, _______, KC_DEL, \
-      _______, _______, _______, AU_ON,   AU_OFF,  AG_NORM,                   AG_SWAP, QWERTY,  COLEMAK, DVORAK,  _______, _______, \
+      _______, _______, _______, AU_ON,   AU_OFF,  AG_NORM,                   AG_SWAP, QWERTY,  COLEMAK, DVORAK,  EUCALYN, _______, \
       _______, _______, _______, _______, _______, _______,                   _______, _______, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, \
       _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RGB_SMOD,RGB_HUD, RGB_SAD, RGB_VAD \
-      )
+      ),
+
+  
+  /* Euaclyn
+   * ,-----------------------------------------.             ,-----------------------------------------.
+   * | Tab  |   /  |   ,  |   .  |   F  |   Q  |             |   M  |   R  |   D  |   Y  |   P  | Bksp |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * | Ctrl |   A  |   O  |   E  |   I  |   U  |             |   G  |   T  |   K  |   S  |   N  |  '   |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * | Shift|   Z  |   X  |   C  |   V  |   W  |   [  |   ]  |   B  |   H  |   J  |   L  |   ;  |Enter |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * |Adjust| Esc  | Alt  | GUI  | EISU |Lower |Space |Space |Raise | KANA | Left | Down |  Up  |Right |
+   * `-------------------------------------------------------------------------------------------------'
+   */
+  [_EUCALYN] = KEYMAP( \
+      KC_TAB,  KC_SLSH, KC_COMM, KC_DOT,  KC_F,    KC_Q,                      KC_M,    KC_R,    KC_D,    KC_Y,    KC_P,    KC_BSPC, \
+      KC_LCTL, KC_A,    KC_O,    KC_E,    KC_I,    KC_U,                      KC_G,    KC_T,    KC_K,    KC_S,    KC_N,    KC_QUOT, \
+      KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_W,    KC_LBRC, KC_RBRC, KC_B,    KC_H,    KC_J,    KC_L,    KC_SCLN, KC_ENT , \
+      ADJUST,  KC_ESC,  KC_LALT, KC_LGUI, EISU,    LOWER,   KC_SPC,  KC_SPC,  RAISE,   KANA,    KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT \
+      ) 
 };
 
 #else
@@ -463,6 +507,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           RGB_current_mode = rgblight_config.mode;
         }
       #endif
+      break;
+    case EUCALYN:
+      if (record->event.pressed) {
+        persistent_default_layer_set(1UL<<_EUCALYN);
+      }
+      return false;
       break;
   }
   return true;
